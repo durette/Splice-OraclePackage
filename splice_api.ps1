@@ -35,8 +35,8 @@ Prerequisites:
    sqlplus /@tns_dev_environment @"myscript.sql"
 
 .Example
-.\splice_api.ps1 -Command init tns_prod_environment -ApiName C_BIG_MONOLITHIC_PACKAGE_API -MethodType PROCEDURE -MethodName THE_ONE_PROCEUDRE_IM_CHANGING
-.\splice_api.ps1 -TnsName tns_prod_environment -ApiName C_BIG_MONOLITHIC_PACKAGE_API -MethodType PROCEDURE -MethodName THE_ONE_PROCEUDRE_IM_CHANGING
+.\splice_api.ps1 -Command init tns_prod_environment -ApiName C_BIG_MONOLITHIC_PACKAGE_API -MethodType PROCEDURE -MethodName THE_ONE_PROCEDURE_IM_CHANGING
+.\splice_api.ps1 -TnsName tns_prod_environment -ApiName C_BIG_MONOLITHIC_PACKAGE_API -MethodType PROCEDURE -MethodName THE_ONE_PROCEDURE_IM_CHANGING
 
 .Parameter Command
 Optional command for special processing:
