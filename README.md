@@ -16,6 +16,16 @@ To reduce the time and risk of doing this manually and to break the dependency o
   * <code>sqlplus /@tns_dev_environment @"myscript.sql"</code>
 
 ## Example
+
+\# We want to start developing, so let's get the current version from PROD as a baseline.<br />
 <code>.\splice_api.ps1 -Command init tns_prod_environment -ApiName C_BIG_MONOLITHIC_PACKAGE_API -MethodType PROCEDURE -MethodName THE_ONE_PROCEDURE_IM_CHANGING</code>
 
+\# We'll make our changes to these filess:<br />
+  * <code>C_BIG_MONOLITHIC_PACKAGE_API_THE_ONE_PROCEDURE_IM_CHANGING_head_dev.pck</code>
+  * <code>C_BIG_MONOLITHIC_PACKAGE_API_THE_ONE_PROCEDURE_IM_CHANGING_body_dev.pck</code>
+
+\# We'll deploy our changes to our DEV environment for alpha testing:<br />
+<code>.\splice_api.ps1 -TnsName tns_dev_environment -ApiName C_BIG_MONOLITHIC_PACKAGE_API -MethodType PROCEDURE -MethodName THE_ONE_PROCEDURE_IM_CHANGING</code>
+
+\# After any other testing, we'll deploy our changes to PROD. Other functions or procedures in the package may have changed since we took our initial snapshot, but we won't disturb them.<br />
 <code>.\splice_api.ps1 -TnsName tns_prod_environment -ApiName C_BIG_MONOLITHIC_PACKAGE_API -MethodType PROCEDURE -MethodName THE_ONE_PROCEDURE_IM_CHANGING</code>
