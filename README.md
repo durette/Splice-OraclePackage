@@ -29,3 +29,41 @@ To reduce the time and risk of doing this manually and to break the dependency o
 
 \# After any other testing, we'll deploy our changes to PROD. Other functions or procedures in the package may have changed since we took our initial snapshot, but we won't disturb them.<br />
 <code>.\splice_api.ps1 -TnsName tns_prod_environment -ApiName C_BIG_MONOLITHIC_PACKAGE_API -MethodType PROCEDURE -MethodName THE_ONE_PROCEDURE_IM_CHANGING</code>
+
+## Setting up Oracle Wallet Authentication
+
+Change everything that starts with "MY_" to your own values. These directions assume you're running Windows on the client machine.
+
+### TNSNAMES.ORA on client
+
+    MY_ENVIRONMENT =
+      (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = TCP)(HOST = MY_ENVIRONMENT_DB_SERVER)(PORT = 1521))
+        (CONNECT_DATA =
+          (SERVER = DEDICATED)
+          (SERVICE_NAME = MY_ENVIRONMENT_SERVICE_NAME)
+        )
+      )
+
+### SQLNET.ORA on client
+
+    SQLNET.WALLET_OVERRIDE=TRUE
+    
+    WALLET_LOCATION=
+      (SOURCE=(METHOD=FILE)
+      (METHOD_DATA=(DIRECTORY=c:\oracle\wallet)))
+
+### Create wallet from command prompt
+
+    set ORACLE_HOME=c:\oracle\product\12.1.0\client_1
+    mkstore -create -wrl c:\oracle\wallet
+    mkstore -wrl c:\oracle\wallet -createCredential MY_ENVIRONMENT MY_USERNAME MY_PASSWORD
+
+### Use the wallet
+
+    sqlplus /@MY_ENVIRONMENT
+
+### Update the password
+
+    mkstore -wrl c:\oracle\wallet -modifyCredential MY_ENVIRONMENT MY_USERNAME
+
