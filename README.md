@@ -18,7 +18,7 @@ To reduce the time and risk of doing this manually and to break the dependency o
 ## Example
 
 \# We want to start developing, so let's get the current version from PROD as a baseline.<br />
-<code>.\splice_api.ps1 -Command init tns_prod_environment -ApiName C_BIG_MONOLITHIC_PACKAGE_API -MethodType PROCEDURE -MethodName THE_ONE_PROCEDURE_IM_CHANGING</code>
+<code>.\splice_api.ps1 -Command init -TnsName tns_prod_environment -ApiName C_BIG_MONOLITHIC_PACKAGE_API -MethodType PROCEDURE -MethodName THE_ONE_PROCEDURE_IM_CHANGING</code>
 
 \# We'll make our changes to these filess:<br />
   * <code>C_BIG_MONOLITHIC_PACKAGE_API_THE_ONE_PROCEDURE_IM_CHANGING_head_dev.pck</code>
